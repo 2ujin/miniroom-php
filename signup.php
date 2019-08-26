@@ -52,14 +52,14 @@
  </style>
  <body>
    <div class="out">
-     <div class="login">
+     <form method="get" action="signup_db.php" class="login">
       <img src="img/cute_face.png" class="face"><br>
-       <input type="text" class="input" placeholder=" 이름" name="id"><br>
+       <input type="text" class="input" placeholder=" 이름" name="name"><br>
        <input type="text" class="input" placeholder=" 닉네임" name="nickname"><br>
        <input type="text" class="input" placeholder=" 아이디" name="id"><br>
        <input type="text" class="input" placeholder=" 비밀번호" name="pw"><br>
-       <input type="button" class="btn1" value="회원가입" onclick="location.href='create_homepage.php'"><br>
-     </div>
+       <input type="submit" class="btn1" value="회원가입"><br>
+     </form>
    </div>
 </body>
 </html>
