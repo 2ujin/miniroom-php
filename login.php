@@ -52,13 +52,13 @@
  </style>
  <body>
    <div class="out">
-     <div class="login">
+     <form class="login" method="get" action="login_check.php">
       <br><img src="img/cute_face.png" class="face"><br>
        <input type="text" class="input" placeholder=" 아이디" name="id"><br>
        <input type="text" class="input" placeholder=" 비밀번호" name="pw"><br><br>
-       <input type="button" class="btn1" value="Login" onclick="location.href='main.php'"><br>
+       <input type="submit" class="btn1" value="Login"><br>
        <code><a href="http://naver.com">아이디/비밀번호 찾기</a>     |     <a href="signup.php">회원가입</a> <code>
-     </div>
+     </form>
    </div>
 </body>
 </html>
