@@ -2,4 +2,4 @@
 oracle DB project
 2019/08 ~
 
-- php로 개발해야징
+- oracleDB와 php로 개발 중 입니다 !!!!!!
