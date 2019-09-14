@@ -1,0 +1,164 @@
+.out {
+ width: 630px;
+ height: 630px;
+ background-color: #EA8E33;
+ margin: auto;
+ box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
+ }
+ .login{
+   width: 400px;
+   height: 500px;
+   background-color: white;
+   border-radius: 80px;
+   position:absolute;
+   left: 438px;
+   top: 80px;
+   text-align: center;
+ }
+ #character1{
+   width: 100px;
+   height: 120px;
+   background-color: #6EB86A;
+   float: left;
+   margin-left: 40px;
+   margin-right: 10px;
+   margin-bottom: 20px;
+   transform: scale(1.0);
+   -webkit-transform: scale(1.0);
+   -moz-transform: scale(1.0);
+   -ms-transform: scale(1.0);
+   -o-transform: scale(1.0);
+   transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+ }
+ #character1:hover{
+   transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
+ }
+ #character2{
+   width: 100px;
+   height: 120px;
+   background-color: #F2B736;
+   float: left;
+   margin-right: 10px;
+   margin-bottom: 20px;
+   transform: scale(1.0);
+   -webkit-transform: scale(1.0);
+   -moz-transform: scale(1.0);
+   -ms-transform: scale(1.0);
+   -o-transform: scale(1.0);
+   transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+ }
+ #character2:hover{
+   transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
+ }
+ #character3{
+   width: 100px;
+   height: 120px;
+   background-color: #E195CE;
+   float: left;
+   margin-bottom: 20px;
+   transform: scale(1.0);
+   -webkit-transform: scale(1.0);
+   -moz-transform: scale(1.0);
+   -ms-transform: scale(1.0);
+   -o-transform: scale(1.0);
+   transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+ }
+ #character3:hover{
+   transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
+ }
+ .color1{
+   width: 50px;
+   height: 50px;
+   background-color: #4F93C1;
+   float: left;
+   margin-bottom: 20px;
+   margin-left: 140px;
+   margin-right: 10px;
+   border-radius: 100%;
+   transform: scale(1.0);
+   -webkit-transform: scale(1.0);
+   -moz-transform: scale(1.0);
+   -ms-transform: scale(1.0);
+   -o-transform: scale(1.0);
+   transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+ }
+ .color1:hover{
+   transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
+ }
+ .color2{
+   width: 50px;
+   height: 50px;
+   background-color: #EA8E33;
+   float: left;
+   margin-bottom: 20px;
+   margin-right: 50px;
+   border-radius: 100%;
+   transform: scale(1.0);
+   -webkit-transform: scale(1.0);
+   -moz-transform: scale(1.0);
+   -ms-transform: scale(1.0);
+   -o-transform: scale(1.0);
+   transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+ }
+ .color2:hover{
+   transform: scale(1.1);
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
+ }
+ .btn1{
+  background-color: orange;
+  border: none;
+  width: 190px;
+  height: 30px;
+  border-radius: 80px;
+ }
+ code{
+   font-size: 10px;
+ }
+ a{
+   text-decoration: none;
+   color: black;
+ }
+ .input{
+   width:190px;
+   height: 25px;
+   margin: 7px;
+   border-radius: 10px;
+   border: none;
+   border:solid 1px #ccc;
+ }
+ .ch1{
+   width: 80%;
+   margin-top: 25px;
+ }
+ .ch2{
+   width: 80%;
+   margin-top: 24px;
+ }
+ .ch3{
+   width: 80%;
+   margin-top: 9px;
+ }
+ .face{
+   width: 13%;
+   margin-top: 20px;
+   margin-bottom: 20px;
+ }

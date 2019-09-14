@@ -6,15 +6,11 @@
   $database = "localhost/xe";
 
   $conn = oci_connect($username, $password, $database,  'AL32UTF8');
+  $id =  $_COOKIE["id"];
 
-  $name = $_GET['name'];
-  $nickname = $_GET['nickname'];
-  $id = $_GET['id'];
-  $password = md5($_GET['pw']);
+  setcookie("color", '파란색');
 
-  setcookie("id", $id);
-
-  $sql = "INSERT INTO user_tbl (NAME, NICKNAME, ID, PW) VALUES('$name', '$nickname', '$id', '$password')";
+  $sql = "UPDATE homepage_tbl SET color = '파란색' where id = '$id'";
   $sti = oci_parse($conn, $sql);
   oci_execute($sti);
   oci_free_statement($sti);
@@ -32,4 +28,4 @@
            alert("fail");
           </script>
   <?php   }
- ?>
+  ?>
