@@ -5,6 +5,8 @@
   $password = '1234';
   $database = "localhost/xe";
   $user = $_GET['user'];
+  setcookie("user", $user);
+
   $query = "select * from homepage_tbl where id='$user'";
   $id =  $_COOKIE["id"];
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
@@ -157,6 +159,11 @@
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
  var id = '<?= $user ?>';
+
+ function send() {
+  location.href = "./guest_insert.php";
+ }
+
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
   $("#describe").text(describe);
@@ -220,9 +227,9 @@ $(document).ready(function(){
      <div class="body">
        <h3>&nbsp;&nbsp;&nbsp;💌 방명록  |  </h3>
        <code class="code">나를 찾아주는 방문자와 안부를 묻고 대화를 할 수 있어요.<code>
-      <form class="write">
-        <textarea cols="50px" rows="5px" placeholder="내용을 입력해주세요!"></textarea>
-        <input type="button" value="✍글쓰기" class="btn1">
+      <form class="write" action="guest_insert.php">
+        <textarea cols="50px" rows="5px" placeholder="내용을 입력해주세요!" name="value"></textarea>
+        <input type="submit" value="✍글쓰기" class="btn1" onclick="send()">
       </form>
       <div class="guest_write">
         📢 은서 : 안녕하세용!~ 놀러왔서욤 ㅎㅎ
