@@ -146,7 +146,24 @@
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
+    var character = '<?= $_COOKIE["character"] ?>';
+    var color = '<?= $_COOKIE["color"] ?>';
    $(document).ready(function(){
+     if(character == '미니'){
+       $("#character").attr("src", "img/mini.png");
+       $("#body_character").attr("src", "img/mini_body.png");
+     }
+     else if(character == '파니'){
+       $("#character").attr("src", "img/pani.png");
+       $("#body_character").attr("src", "img/pani_body.png");
+     }
+     else if(character == '보라'){
+       $("#character").attr("src", "img/bora.png");
+       $("#body_character").attr("src", "img/bora_body.png");
+       $("#character").css("margin-top", "8px");
+       $("#character").css("width", "70%");
+     }
+
      $(".list").on("click", function(){
          $(".list").css("background-color", "#4F93C1");
      });
@@ -172,13 +189,15 @@
        <a href="store.php"><div class="list3">&nbsp;&nbsp;&nbsp;상점</div></a>
        <a href="management.php"><div class="list4">&nbsp;&nbsp;&nbsp;&nbsp;관리</div></a>
        <div class="header">
-         <div class="character1"><img src="img/ch1.png" class="ch1"></div><br>
+         <div class="character1">
+           <img src="img/pani.png" id="character" class="ch1">
+         </div><br>
          &nbsp;&nbsp;🏡<b>유진</b>님의 미니홈피<br>
          <code>&nbsp;&nbsp;안녕하세요 ~~ 제 미니홈피에 놀러오신 것을 환영합니다 😛 </code>
          <a href="#"><div class="random_page">🌌</div></a>
        </div>
     <div class="body">
-      <img src="img/character1.png" class="main_ch">
+      <img src="img/character1.png" class="main_ch" id="body_character">
     </div>
    </div>
 </body>

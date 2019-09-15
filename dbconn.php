@@ -3,32 +3,33 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-$username = "DBTEST";                  // Use your username
-$password = "1234";             // and your password
-$database = "localhost/xe";   // and the connect string to connect to your database
-$query = "select * from testtbl";
+$host = 'localhost';
+$username = 'minirooma';
+$password = '1234';
+$database = "localhost/xe";
+$id =  $_COOKIE["id"];
 
-$c = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
-$s = oci_parse($c, $query);
-$r = oci_execute($s);
+$query = "select * from homepage_tbl where id='$id'";
 
-echo "<table border='1'>\n";
-$ncols = oci_num_fields($s);
-echo "<tr>\n";
-for ($i = 1; $i <= $ncols; ++$i) {
-    $colname = oci_field_name($s, $i);
-    echo "  <th><b>".htmlspecialchars($colname,ENT_QUOTES|ENT_SUBSTITUTE)."</b></th>\n";
+
+$conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+$sti = oci_parse($conn, $query);
+oci_execute($sti);
+
+while ($row = oci_fetch_array($sti)){
+      setcookie("color", $row[2]);
+      setcookie("character", $row[1]);
 }
-echo "</tr>\n";
 
-while (($row = oci_fetch_array($s, OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
-    echo "<tr>\n";
-    foreach ($row as $item) {
-        echo "<td>";
-        echo $item!==null?htmlspecialchars($item, ENT_QUOTES|ENT_SUBSTITUTE):"&nbsp;";
-        echo "</td>\n";
-    }
-    echo "</tr>\n";
-}
-echo "</table>\n";
+if($sti) {
+ ?>      <script>
+         location.replace("./main.php");
+         </script>
+
+<?php   }
+        else{
+?>      <script>
+         alert("fail");
+        </script>
+<?php   }
 ?>
