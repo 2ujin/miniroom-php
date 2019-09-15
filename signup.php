@@ -4,6 +4,13 @@
   <meta charset = "utf-8">
   <title>✨MINIROOM✨</title>
  </head>
+ <script>
+ function send(){
+   document.form.action='main.php';
+   document.form.submit();
+   document.form.action='signup_db.php';
+ }
+ </script>
  <style>
  .out {
   width: 630px;
@@ -52,13 +59,13 @@
  </style>
  <body>
    <div class="out">
-     <form method="get" action="signup_db.php" class="login">
+     <form method="get" name="form" class="login" action="#">
       <img src="img/cute_face.png" class="face"><br>
        <input type="text" class="input" placeholder=" 이름" name="name"><br>
        <input type="text" class="input" placeholder=" 닉네임" name="nickname"><br>
        <input type="text" class="input" placeholder=" 아이디" name="id"><br>
        <input type="text" class="input" placeholder=" 비밀번호" name="pw"><br>
-       <input type="submit" class="btn1" value="회원가입"><br>
+       <input type="submit" class="btn1" value="회원가입" onclick="send()"><br>
      </form>
    </div>
 </body>

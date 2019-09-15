@@ -1,0 +1,158 @@
+.out {
+ width: 630px;
+ height: 630px;
+ background-color: #4F93C1;
+ margin: auto;
+ box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
+ text-align: center;
+ }
+ .btn1{
+  position:absolute;
+  background-color: #e3f2fd;
+  border: none;
+  width: 80px;
+  height: 25px;
+  border-radius: 80px;
+  left: 480px;
+  top: 220px;
+  font-family: "AppleSDGothicNeoM00";
+ }
+ .list{
+   width: 90px;
+   height: 40px;
+   background-color: #D8D2C3;
+   position:absolute;
+   left: 925px;
+   top: 145px;
+   border-radius:0px 10px 10px 0px;
+   line-height: 42px;
+   font-family: "AppleSDGothicNeoM00";
+   font-size: 18px;
+ }
+ .list1{
+   width: 90px;
+   height: 40px;
+   background-color: #4F93C1;
+   position:absolute;
+   left: 925px;
+   top: 205px;
+   border-radius:0px 10px 10px 0px;
+   line-height: 42px;
+   font-family: "AppleSDGothicNeoM00";
+   font-size: 18px;
+ }
+ .list2{
+   width: 90px;
+   height: 40px;
+   background-color: #D8D2C3;
+   position:absolute;
+   left: 925px;
+   top: 265px;
+   border-radius:0px 10px 10px 0px;
+   line-height: 42px;
+   font-family: "AppleSDGothicNeoM00";
+   font-size: 18px;
+ }
+ .list3{
+   width: 90px;
+   height: 40px;
+   background-color: #D8D2C3;
+   position:absolute;
+   left: 925px;
+   top: 325px;
+   border-radius:0px 10px 10px 0px;
+   line-height: 42px;
+   font-family: "AppleSDGothicNeoM00";
+   font-size: 18px;
+ }
+ .list4{
+   width: 90px;
+   height: 40px;
+   background-color: #D8D2C3;
+   position:absolute;
+   left: 925px;
+   top: 385px;
+   border-radius:0px 10px 10px 0px;
+   line-height: 42px;
+   font-family: "AppleSDGothicNeoM00";
+   font-size: 18px;
+ }
+ .header{
+   width: 600px;
+   height: 100px;
+   background-color: white;
+   border-radius: 20px;
+   position:absolute;
+   left: 340px;
+   top: 20px;
+   text-align: left;
+   font-size: 21px;
+   font-family: "AppleSDGothicNeoM00";
+ }
+ .body{
+   width: 600px;
+   height: 500px;
+   background-color: white;
+   border-radius: 20px;
+   position:absolute;
+   left: 340px;
+   top: 130px;
+   text-align: center;
+ }
+ a{
+   text-decoration: none;
+   color: black;
+ }
+ .character1{
+   width: 80px;
+   height: 93px;
+   background-color: #6EB86A;
+   float: left;
+   border-radius:20px;
+   margin-top: 3px;
+   margin-left: 3px;
+   margin-right: 3px;
+   margin-bottom: 10px;
+   text-align: center;
+ }
+ .ch1{
+   width: 80%;
+   margin-top: 20px;
+ }
+ .main_ch{
+   width: 90px;
+   position:absolute;
+   left: 260px;
+   top: 200px;
+ }
+ .random_page{
+   width:60px;
+   height: 60px;
+   border-radius: 50%;
+   position:absolute;
+   left: 530px;
+   top: 30px;
+   text-align: center;
+   font-size: 40px;
+   line-height: 60px;
+ }
+ #homename{
+   margin-top: 20px;
+   font-size: 23px;
+ }
+ #describe{
+   margin-top: -20px;
+   margin-left: 90px;
+ }
+ p{
+   font-size: 15px;
+   font-family: "AppleSDGothicNeoM00";
+ }
+ b{
+   color: #1029ac;
+ }
+ h3{
+   text-align: left;
+   font-size: 25px;
+   font-family: "AppleSDGothicNeoM00";
+ }

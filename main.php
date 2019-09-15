@@ -1,18 +1,30 @@
-<!DOCTYPE html>
+<head><meta content="text/html; charset=utf-8"></head>
+<?php
+  $host = 'localhost';
+  $username = 'minirooma';
+  $password = '1234';
+  $database = "localhost/xe";
+  $user = $_GET['user'];
+  $query = "select * from homepage_tbl where id='$user'";
+  $id =  $_COOKIE["id"];
+  $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+  $sti = oci_parse($conn, $query);
+  oci_execute($sti);
+
+  while ($row = oci_fetch_array($sti)){
+        setcookie("color", $row[2]);
+        setcookie("character", $row[1]);
+        setcookie("homename", $row[3]);
+        setcookie("describe", $row[4]);
+  }
+?>
 <html>
  <head>
   <meta charset = "utf-8">
   <title>✨MINIROOM✨</title>
  </head>
+  <link rel="stylesheet" href="header.css">
  <style>
- .out {
-  width: 630px;
-  height: 630px;
-  background-color: #4F93C1;
-  margin: auto;
-  box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
-  text-align: center;
-  }
   .list{
     width: 90px;
     height: 40px;
@@ -22,7 +34,7 @@
     top: 145px;
     border-radius:0px 10px 10px 0px;
     line-height: 42px;
-    font-family: "Na@거승-손글씨콘테스트2010";
+    font-family: "AppleSDGothicNeoM00";
     font-size: 18px;
   }
   .list1{
@@ -34,7 +46,7 @@
     top: 205px;
     border-radius:0px 10px 10px 0px;
     line-height: 42px;
-    font-family: "Na@거승-손글씨콘테스트2010";
+    font-family: "AppleSDGothicNeoM00";
     font-size: 18px;
   }
   .list2{
@@ -46,7 +58,7 @@
     top: 265px;
     border-radius:0px 10px 10px 0px;
     line-height: 42px;
-    font-family: "Na@거승-손글씨콘테스트2010";
+    font-family: "AppleSDGothicNeoM00";
     font-size: 18px;
   }
   .list3{
@@ -58,7 +70,7 @@
     top: 325px;
     border-radius:0px 10px 10px 0px;
     line-height: 42px;
-    font-family: "Na@거승-손글씨콘테스트2010";
+    font-family: "AppleSDGothicNeoM00";
     font-size: 18px;
   }
   .list4{
@@ -70,20 +82,8 @@
     top: 385px;
     border-radius:0px 10px 10px 0px;
     line-height: 42px;
-    font-family: "Na@거승-손글씨콘테스트2010";
-    font-size: 18px;
-  }
-  .header{
-    width: 600px;
-    height: 100px;
-    background-color: white;
-    border-radius: 20px;
-    position:absolute;
-    left: 340px;
-    top: 20px;
-    text-align: left;
-    font-size: 21px;
     font-family: "AppleSDGothicNeoM00";
+    font-size: 18px;
   }
   .body{
     width: 600px;
@@ -99,50 +99,7 @@
     top: 130px;
     text-align: center;
   }
-  a{
-    text-decoration: none;
-    color: black;
-  }
-  .character1{
-    width: 80px;
-    height: 93px;
-    background-color: #6EB86A;
-    float: left;
-    border-radius:20px;
-    margin-top: 3px;
-    margin-left: 3px;
-    margin-right: 3px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  .ch1{
-    width: 80%;
-    margin-top: 20px;
-  }
-  code{
-    font-size: 15px;
-    font-family: "AppleSDGothicNeoM00";
-  }
-  b{
-    color: #1029ac;
-  }
-.main_ch{
-  width: 90px;
-  position:absolute;
-  left: 260px;
-  top: 200px;
-}
-.random_page{
-  width:60px;
-  height: 60px;
-  border-radius: 50%;
-  position:absolute;
-  left: 530px;
-  top: 30px;
-  text-align: center;
-  font-size: 40px;
-  line-height: 60px;
-}
+
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
@@ -150,7 +107,12 @@
     var color = '<?= $_COOKIE["color"] ?>';
     var homename = '<?= $_COOKIE["homename"] ?>';
     var describe = '<?= $_COOKIE["describe"] ?>';
+    var id = '<?= $user ?>';
+ // location.href = "./main.php?user="+id;
    $(document).ready(function(){
+     $("#homename").text("🏡" + homename);
+     $("#describe").text(describe);
+
      if(character == '미니'){
        $("#character").attr("src", "img/mini.png");
        $("#body_character").attr("src", "img/mini_body.png");
@@ -172,38 +134,43 @@
      }
      $(".list").on("click", function(){
          $(".list").css("background-color", "#4F93C1");
+         location.href = "./main.php?user="+id;
      });
      $(".list1").on("click", function(){
          $(".list1").css("background-color", "#4F93C1");
+         location.href = "./board.php?user="+id;
      });
      $(".list2").on("click", function(){
          $(".list2").css("background-color", "#4F93C1");
+          location.href = "./guest.php?user="+id;
      });
      $(".list3").on("click", function(){
          $(".list3").css("background-color", "#4F93C1");
+          location.href = "./store.php?user="+id;
      });
      $(".list4").on("click", function(){
          $(".list4").css("background-color", "#4F93C1");
+          location.href = "./management.php?user="+id;
      });
    });
 </script>
  <body>
    <div class="out">
-       <a href="main.php"><div class="list">&nbsp;&nbsp;&nbsp;&nbsp;홈</div></a>
-       <a href="board.php"><div class="list1">&nbsp;&nbsp;&nbsp;게시판</div></a>
-       <a href="guest.php"><div class="list2">&nbsp;&nbsp;&nbsp;방명록</div></a>
-       <a href="store.php"><div class="list3">&nbsp;&nbsp;&nbsp;상점</div></a>
-       <a href="management.php"><div class="list4">&nbsp;&nbsp;&nbsp;&nbsp;관리</div></a>
+       <a><div class="list">&nbsp;&nbsp;&nbsp;&nbsp;홈</div></a>
+       <a><div class="list1">&nbsp;&nbsp;&nbsp;게시판</div></a>
+       <a><div class="list2">&nbsp;&nbsp;&nbsp;방명록</div></a>
+       <a><div class="list3">&nbsp;&nbsp;&nbsp;상점</div></a>
+       <a><div class="list4">&nbsp;&nbsp;&nbsp;&nbsp;관리</div></a>
        <div class="header">
          <div class="character1">
-           <img src="img/pani.png" id="character" class="ch1">
-         </div><br>
-         &nbsp;&nbsp;🏡<b>유진</b>님의 미니홈피<br>
-         <code>&nbsp;&nbsp;안녕하세요 ~~ 제 미니홈피에 놀러오신 것을 환영합니다 😛 </code>
+           <img id="character" class="ch1">
+         </div>
+         <p id="homename"></p>
+         <p id="describe"></p>
          <a href="#"><div class="random_page">🌌</div></a>
        </div>
     <div class="body">
-      <img src="img/character1.png" class="main_ch" id="body_character">
+      <img  class="main_ch" id="body_character">
     </div>
    </div>
 </body>

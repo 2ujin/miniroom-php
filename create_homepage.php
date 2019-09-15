@@ -8,6 +8,10 @@
  <link rel="stylesheet" href="style.css">
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
+ function send(){
+   document.form.action='create_homepage_db.php';
+   document.form.submit();
+ }
   function pani(){
     location.href = 'pani.php';
   }
@@ -58,7 +62,7 @@
 });
  </script>
  <body>
-   <form method="get" action="create_homepage_db.php">
+   <form method="get" action="#" name="form">
    <div class="out">
      <div class="login">
       <br><img src="img/cute_face.png" class="face"><br>
@@ -70,7 +74,7 @@
       <div class="color1" onclick="blue()" name="blue"></div><div class="color2" onclick="orange()" name="orange"></div><br>
        <input type="text" class="input" placeholder=" 홈피 이름" name="homename"><br>
        <input type="text" class="input" placeholder=" 간단한 소개" name="describe"><br><br>
-       <input type="submit" class="btn1" value="확인"><br>
+       <input type="submit" class="btn1" value="확인" onclick="send()"><br>
      </div>
    </div>
    </form>

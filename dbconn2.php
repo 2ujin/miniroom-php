@@ -24,7 +24,8 @@ while ($row = oci_fetch_array($sti)){
 // echo $_COOKIE["describe"];
 if($sti) {
  ?>      <script>
-         location.replace("./main.php");
+          var id = '<?= $id ?>';
+          location.href = "./main.php?user="+id;
          </script>
 
 <?php   }

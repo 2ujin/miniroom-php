@@ -11,7 +11,6 @@ $id =  $_COOKIE["id"];
 
 $query = "select * from homepage_tbl where id='$id'";
 
-
 $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
 $sti = oci_parse($conn, $query);
 oci_execute($sti);
@@ -25,7 +24,8 @@ while ($row = oci_fetch_array($sti)){
 // echo $_COOKIE["describe"];
 if($sti) {
  ?>      <script>
-         location.replace("./main.php");
+          var id = '<?= $id ?>';
+         location.href = "./main.php?user="+id;
          </script>
 
 <?php   }
