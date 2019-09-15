@@ -20,6 +20,7 @@
   while ($row = oci_fetch_array($sti2)){
     setcookie("nickname", $row[1]); //로그인 한 id의 닉네임 갖고오는 거임
   }
+
   $nickname =  $_COOKIE["nickname"];
   $date = date("Y-m-d");
   // echo $nickname;
@@ -34,7 +35,7 @@
   if($sti2) {
    ?>      <script>
             var id = '<?= $user ?>';
-           location.href = "./guest.php?user="+id;
+           location.replace("./guest.php?user="+id);
            </script>
 
   <?php   }

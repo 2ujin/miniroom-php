@@ -7,18 +7,39 @@
   $user = $_GET['user'];
   setcookie("user", $user);
 
-  $query = "select * from homepage_tbl where id='$user'";
-  $id =  $_COOKIE["id"];
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
-  $sti = oci_parse($conn, $query);
-  oci_execute($sti);
 
-  while ($row = oci_fetch_array($sti)){
-        setcookie("color", $row[2]);
-        setcookie("character", $row[1]);
-        setcookie("homename", $row[3]);
-        setcookie("describe", $row[4]);
+  $result = "select AUTHOR, CONTENTS, C_DATE from guest_tbl where touser='$user'";
+  $sti2 = oci_parse($conn, $result);
+
+  oci_execute($sti2);
+  //
+  // $result = "select * from guest_tbl where touser ='$user'"
+  // $sti2 = oci_parse($conn, $result);
+  // oci_execute($sti2);
+
+  while ($row = oci_fetch_array($sti2)){
+    echo "<table width=600 border=1><tr>";
+    echo "<td>No. $row[0]</td>";
+    echo "<td>$row[1]</td>";
+    echo "<td>$row[2]</td></tr></table>";
+    // echo $row[0];
+    echo "<br/>";
+    // print_r $row[]
   }
+
+  // $query = "select * from homepage_tbl where id='$user'";
+  // $id =  $_COOKIE["id"];
+  //
+  // $sti = oci_parse($conn, $query);
+  // oci_execute($sti);
+  //
+  // while ($row = oci_fetch_array($sti)){
+  //       setcookie("color", $row[2]);
+  //       setcookie("character", $row[1]);
+  //       setcookie("homename", $row[3]);
+  //       setcookie("describe", $row[4]);
+  // }
 ?>
 <html>
  <head>
@@ -160,9 +181,12 @@
  var describe = '<?= $_COOKIE["describe"] ?>';
  var id = '<?= $user ?>';
 
- function send() {
-  location.href = "./guest_insert.php";
- }
+ // function send(){
+ //   alert("gd");
+ //   $( document ).ready( function() {
+ //       $("#bigdiv").append("<div class='guest_write1'>메롱</div>");
+ //   });
+ // }
 
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
@@ -227,12 +251,13 @@ $(document).ready(function(){
      <div class="body">
        <h3>&nbsp;&nbsp;&nbsp;💌 방명록  |  </h3>
        <code class="code">나를 찾아주는 방문자와 안부를 묻고 대화를 할 수 있어요.<code>
-      <form class="write" action="guest_insert.php">
+      <form class="write" action="guest_insert.php" >
         <textarea cols="50px" rows="5px" placeholder="내용을 입력해주세요!" name="value"></textarea>
         <input type="submit" value="✍글쓰기" class="btn1" onclick="send()">
       </form>
+      <div id="bigdiv">
       <div class="guest_write">
-        📢 은서 : 안녕하세용!~ 놀러왔서욤 ㅎㅎ
+      📢 은서 : 안녕하세용!~ 놀러왔서욤 ㅎㅎ
       </div>
       <div class="guest_write1">
         📢 은서 : 반가워요 ㅎㅎㅎㅎㅎ :-)
@@ -241,6 +266,7 @@ $(document).ready(function(){
         📢 소민 : 내일 놀 사람 ~~~ 전 너무 심심해요 ㅜㅠ
       </div>
      </div>
+     <div>
    </div>
 </body>
 </html>
