@@ -12,11 +12,24 @@
   $id = $_GET['id'];
   $pw = $_GET['pw'];
 
-  $query = "select * from user_tbl where id='$id'";
-  $result = $conn->query($query)
+  setcookie("id", $id);
 
-  if($result){
-    ?>
-  <?php alert("헬로우~");
+
+  $query = "select * from user_tbl where id='$id'";
+  // $result = $conn->query($query);
+  $sti = oci_parse($conn, $query);
+  oci_execute($sti);
+// echo "메롱";
+  while ($row = oci_fetch_array($sti)){
+    if($id==$row[2] && $pw==$row[3]){ // id와 pw가 맞다면 login
+       $_SESSION['id']=$row[2];
+       $_SESSION['nickname']=$row['1'];
+       echo "<script>alert('로그인 성공!')</script>";
+       echo "<script>location.href='dbconn2.php';</script>";
+    }else{ // id 또는 pw가 다르다면 login 폼으로
+      echo "<script>alert('로그인 실패!')</script>";
+      echo "<script>location.href='login.php';</script>";
+    }
   }
+
  ?>

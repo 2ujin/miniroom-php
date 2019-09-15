@@ -148,6 +148,8 @@
  <script type="text/javascript">
     var character = '<?= $_COOKIE["character"] ?>';
     var color = '<?= $_COOKIE["color"] ?>';
+    var homename = '<?= $_COOKIE["homename"] ?>';
+    var describe = '<?= $_COOKIE["describe"] ?>';
    $(document).ready(function(){
      if(character == '미니'){
        $("#character").attr("src", "img/mini.png");
@@ -163,7 +165,11 @@
        $("#character").css("margin-top", "8px");
        $("#character").css("width", "70%");
      }
-
+     if(color == '파란색'){
+     }
+     else{
+       $(".out").css("background-color", "#EA8E33");
+     }
      $(".list").on("click", function(){
          $(".list").css("background-color", "#4F93C1");
      });

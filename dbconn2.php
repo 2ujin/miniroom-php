@@ -8,7 +8,6 @@ $username = 'minirooma';
 $password = '1234';
 $database = "localhost/xe";
 $id =  $_COOKIE["id"];
-
 $query = "select * from homepage_tbl where id='$id'";
 
 

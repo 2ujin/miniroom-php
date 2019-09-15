@@ -1,3 +1,10 @@
+<?php
+//
+// session_start(); // 세션
+// // echo $_SESSION['id'];
+// if($_SESSION['id']==null) { // 로그인 하지 않았다면
+
+?>
 <!DOCTYPE html>
 <html>
  <head>
@@ -62,3 +69,11 @@
    </div>
 </body>
 </html>
+<!-- <?php
+
+// }else{ // 로그인 했다면
+   // echo "(".$_SESSION['nickname'].")님이 로그인 하였습니다.";
+   // echo "&nbsp;<a href='logout.php'><input type='button' value='Logout'></a>";
+// }
+
+?> -->

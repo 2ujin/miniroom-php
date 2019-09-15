@@ -23,7 +23,7 @@
 
   if($sti) {
    ?>      <script>
-           location.replace("./dbconn.php");
+             location.replace("./dbconn.php");
            </script>
 
   <?php   }

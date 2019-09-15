@@ -10,7 +10,7 @@
   $name = $_GET['name'];
   $nickname = $_GET['nickname'];
   $id = $_GET['id'];
-  $password = md5($_GET['pw']);
+  $password = $_GET['pw'];
 
   setcookie("id", $id);
 
