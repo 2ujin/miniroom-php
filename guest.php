@@ -9,37 +9,23 @@
 
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
 
-  $result = "select AUTHOR, CONTENTS, C_DATE from guest_tbl where touser='$user'";
+  $result = "select AUTHOR, CONTENTS, C_DATE from guest_tbl where touser='$user' ORDER BY c_date ASC";
   $sti2 = oci_parse($conn, $result);
 
   oci_execute($sti2);
-  //
-  // $result = "select * from guest_tbl where touser ='$user'"
-  // $sti2 = oci_parse($conn, $result);
-  // oci_execute($sti2);
 
-  while ($row = oci_fetch_array($sti2)){
-    echo "<table width=600 border=1><tr>";
-    echo "<td>No. $row[0]</td>";
-    echo "<td>$row[1]</td>";
-    echo "<td>$row[2]</td></tr></table>";
-    // echo $row[0];
-    echo "<br/>";
-    // print_r $row[]
+  $query = "select * from homepage_tbl where id='$user'"; //$user로 해야 주소를 바꿀 때 마다 캐릭터랑 그런게 바뀌니꽌,,
+  $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+  $sti = oci_parse($conn, $query);
+  oci_execute($sti);
+
+  while ($row = oci_fetch_array($sti)){
+        setcookie("color", $row[2]); //user의 색깔져장
+        setcookie("character", $row[1]);
+        setcookie("homename", $row[3]);
+        setcookie("describe", $row[4]);
   }
 
-  // $query = "select * from homepage_tbl where id='$user'";
-  // $id =  $_COOKIE["id"];
-  //
-  // $sti = oci_parse($conn, $query);
-  // oci_execute($sti);
-  //
-  // while ($row = oci_fetch_array($sti)){
-  //       setcookie("color", $row[2]);
-  //       setcookie("character", $row[1]);
-  //       setcookie("homename", $row[3]);
-  //       setcookie("describe", $row[4]);
-  // }
 ?>
 <html>
  <head>
@@ -108,6 +94,19 @@
     font-family: "AppleSDGothicNeoM00";
     font-size: 18px;
   }
+  #guest_tbl{
+    width:560px;
+    height: 265px;
+    border-radius: 20px;
+    position:absolute;
+    left: -130px;
+    top: 180px;
+    text-align: center;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* background-color: #cecece; */
+  }
   code{
     font-size: 15px;
     font-family: "AppleSDGothicNeoM00";
@@ -127,6 +126,12 @@
     left: -130px;
     top: 35px;
     background-color: #cecece;
+  }
+  #table{
+    margin: auto;
+    background-color: #cecece;
+    border-radius: 30px;
+    margin-bottom: 5px;
   }
   .btn1{
    position:absolute;
@@ -180,13 +185,6 @@
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
  var id = '<?= $user ?>';
-
- // function send(){
- //   alert("gd");
- //   $( document ).ready( function() {
- //       $("#bigdiv").append("<div class='guest_write1'>메롱</div>");
- //   });
- // }
 
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
@@ -255,8 +253,18 @@ $(document).ready(function(){
         <textarea cols="50px" rows="5px" placeholder="내용을 입력해주세요!" name="value"></textarea>
         <input type="submit" value="✍글쓰기" class="btn1" onclick="send()">
       </form>
-      <div id="bigdiv">
-      <div class="guest_write">
+      <div id="guest_tbl">
+        <?php
+        while ($row = oci_fetch_array($sti2)){
+          echo "<table id='table'><tr>";
+          echo "<td width='100px'>📢 $row[0] : </td>";
+          echo "<td width='480px'>$row[1]</td>";
+          echo "</tr></table>";
+        }
+        ?>
+      </div>
+    </div>
+      <!-- <div class="guest_write">
       📢 은서 : 안녕하세용!~ 놀러왔서욤 ㅎㅎ
       </div>
       <div class="guest_write1">
@@ -264,7 +272,7 @@ $(document).ready(function(){
       </div>
       <div class="guest_write2">
         📢 소민 : 내일 놀 사람 ~~~ 전 너무 심심해요 ㅜㅠ
-      </div>
+      </div> -->
      </div>
      <div>
    </div>

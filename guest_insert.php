@@ -22,7 +22,7 @@
   }
 
   $nickname =  $_COOKIE["nickname"];
-  $date = date("Y-m-d");
+  $date = date("H:i:s");
   // echo $nickname;
   // echo $date;
   $sql = "INSERT INTO guest_tbl (ID, TOUSER, AUTHOR, CONTENTS, C_DATE) VALUES('$id','$user' ,'$nickname', '$value', '$date')";
