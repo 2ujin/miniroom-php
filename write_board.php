@@ -49,17 +49,6 @@
     font-size: 12px;
     border-bottom: 1px dotted gray;
   }
-  .random_page{
-    width:60px;
-    height: 60px;
-    border-radius: 50%;
-    position:absolute;
-    left: 530px;
-    top: 30px;
-    text-align: center;
-    font-size: 40px;
-    line-height: 60px;
-  }
   input{
     border-radius: 15px;
     width: 500px;
@@ -90,6 +79,17 @@
     height: 25px;
     border-radius: 80px;
     font-family: "AppleSDGothicNeoM00";
+  }
+  .random_page{
+    width:60px;
+    height: 60px;
+    border-radius: 50%;
+    position:absolute;
+    left: 530px;
+    top: 30px;
+    text-align: center;
+    font-size: 40px;
+    line-height: 60px;
   }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>

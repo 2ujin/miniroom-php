@@ -9,12 +9,12 @@
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
   $id =  $_COOKIE["id"];
   // echo $id;
-  $result = "select b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where AUTHOR = '$user' and f.id = b.id  or (f.mem_id = '$user' and f.target_mem_id = '$id')";
+  $result = "select b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where AUTHOR = '$user' and f.id = b.id  or (f.mem_id = '$user' and f.target_mem_id = '$id') ORDER BY b.no";
   $sti2 = oci_parse($conn, $result);
 
   oci_execute($sti2);
 
-  // $query = "select target_mem_id from friend_tbl where mem_id='royouin'";
+  // $query = "select * from (select id from user_tbl order by dbms_random.value) where rownum <= 1";
   $query = "select * from homepage_tbl where id='$user'";
   $id =  $_COOKIE["id"];
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
@@ -22,9 +22,6 @@
   oci_execute($sti);
 
   while ($row = oci_fetch_array($sti)){
-    // echo $row[0];
-        // setcookie("color", $row[0]);
-        // echo $_COOKIE["color"];
         setcookie("color", $row[2]);
         setcookie("character", $row[1]);
         setcookie("homename", $row[3]);
@@ -176,7 +173,7 @@ $(document).ready(function(){
        </div>
        <p id="homename"></p>
        <p id="describe"></p>
-       <a href="#"><div class="random_page">🌌</div></a>
+       <!-- <a href="#"><div class="random_page">🌌</div></a> -->
      </div>
      <div class="body">
        <h3>&nbsp;&nbsp;&nbsp;📄 게시판 | </h3>

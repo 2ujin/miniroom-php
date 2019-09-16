@@ -19,11 +19,13 @@
         setcookie("describe", $row[4]);
   }
 ?>
+
 <html>
  <head>
   <meta charset = "utf-8">
   <title>✨MINIROOM✨</title>
  </head>
+ <link rel="shortcut icon" href="%PUBLIC_URL%/stipop.png" />
   <link rel="stylesheet" href="header.css">
  <style>
   .list{
@@ -101,18 +103,33 @@
     text-align: center;
   }
   #input{
-    /* background-color: gray; */
+    border: none;
+    background: transparent;
     position: absolute;
-    left: 530px;
-    top: 6px
-    /* margin-left: 300px; */
+    left: 550px;
+    top: 8px;
+    font-size: 20px;
   }
   #input2{
-    /* background-color: gray; */
+    border: none;
+    background: transparent;
     position: absolute;
-    left: 460px;
-    top: 6px
-    /* margin-left: 300px; */
+    left: 520px;
+    top: 8px;
+    font-size: 20px;
+  }
+  .random_page{
+    border: none;
+    background: transparent;
+    width:60px;
+    height: 60px;
+    border-radius: 50%;
+    position:absolute;
+    left: 525px;
+    top: 35px;
+    text-align: center;
+    font-size: 40px;
+    line-height: 60px;
   }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -121,6 +138,7 @@
     var color = '<?= $_COOKIE["color"] ?>';
     var homename = '<?= $_COOKIE["homename"] ?>';
     var describe = '<?= $_COOKIE["describe"] ?>';
+
     var id = '<?= $user ?>'; //주소값 가져온거임 헷갈 노노 로그인한 id 아님
  // location.href = "./main.php?user="+id;
     function add_friend(){
@@ -130,6 +148,24 @@
    $(document).ready(function(){
      $("#homename").text("🏡" + homename);
      $("#describe").text(describe);
+
+     $(".random_page").on("click", function(){
+       <?php
+         $query = "select * from (select id from user_tbl order by dbms_random.value) where rownum <= 1";
+         $id =  $_COOKIE["id"];
+         $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+         $sti = oci_parse($conn, $query);
+         oci_execute($sti);
+
+         while ($row = oci_fetch_array($sti)){
+          setcookie("randomId", $row[0]);
+        }
+       ?>
+       var randomId = '<?= $_COOKIE["randomId"] ?>';
+         // alert(randomId);
+
+         location.href = "./main.php?user="+randomId;
+     });
 
      if(character == '미니'){
        $("#character").attr("src", "img/mini.png");
@@ -189,12 +225,11 @@
           if($id == $user){ ?>
          <?php }
           else{ ?> <!-- 로그인한 사람 페이지가 아닐때만 친구추가 버튼 보여쥼 ㅎㅎ-->
-            <a><input type="button" id="input" value="🙋‍" onclick="add_friend()"></a>
+            <input type="button" id="input" value="🙋‍" onclick="add_friend()">
           <?php }
           ?>
          <a href="logout.php"><input type="button" id="input2" value="👋"></a>
-
-         <a href="#"><div class="random_page">🌌</div></a>
+         <a ><input type="button" class="random_page" value="🌌"></a>
        </div>
     <div class="body">
       <img  class="main_ch" id="body_character">
