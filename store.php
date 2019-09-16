@@ -5,9 +5,22 @@
   $password = '1234';
   $database = "localhost/xe";
   $user = $_GET['user'];
+  $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+
+  $result1 = "select name, src from store_tbl where kind='신발'";
+  $sti1 = oci_parse($conn, $result1);
+  oci_execute($sti1);
+
+  $result2 = "select name, src from store_tbl where kind='치마'";
+  $sti2 = oci_parse($conn, $result2);
+  oci_execute($sti2);
+
+  $result3 = "select name, src from store_tbl where kind='티셔츠'";
+  $sti3 = oci_parse($conn, $result3);
+  oci_execute($sti3);
+
   $query = "select * from homepage_tbl where id='$user'";
   $id =  $_COOKIE["id"];
-  $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
   $sti = oci_parse($conn, $query);
   oci_execute($sti);
 
@@ -116,6 +129,78 @@
     top: 35px;
     left: 120px;
   }
+  #contents{
+    width: 600px;
+    height: 380px;
+    /* background-color: red; */
+    position:absolute;
+    left: -120px;
+    top: 40px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+  #img{
+    width: 100px;
+  }
+  #img1{
+    width: 65px;
+  }
+  table{
+    font-family: "AppleSDGothicNeoM00";
+    margin: auto;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 10px;
+  }
+  td{
+    padding: 7px;
+    font-size: 12px;
+    /* border-bottom: 1px dotted gray; */
+  }
+  #shoes{
+    width: 200px;
+    height: 380px;
+    float: left;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+  }
+  #h3{
+    text-align: center;
+  }
+  #dress{
+    width: 200px;
+    height: 380px;
+    position:absolute;
+    left: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+  }
+  #tshirt{
+    width: 200px;
+    height: 380px;
+    position:absolute;
+    left: 400px;
+    float: left;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+  }
+  #btn{
+    position:absolute;
+    top: 410px;
+    left: 130px;
+    /* margin-top: 380px; */
+    /* margin-left: 140px; */
+    /* margin-bottom: 10px; */
+    background-color: #e3f2fd;
+    border: none;
+    width: 100px;
+    height: 25px;
+    border-radius: 80px;
+    font-family: "AppleSDGothicNeoM00";
+  }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
@@ -124,6 +209,12 @@
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
  var id = '<?= $user ?>';
+
+function popup(){
+  var popupX = (document.body.offsetWidth / 2) - (200 / 2) - 80;
+  var popupY= (document.body.offsetHeight / 2) - (300 / 2) - 60;
+  window.open("buy_table.php", "pop", 'width=400,height=300,history=no,resizable=no,status=no,scrollbars=no,menubar=no, left='+popupX+', top=' + popupY);
+}
 
  $(document).ready(function(){
   $("#homename").text("🏡" + homename);
@@ -187,8 +278,44 @@
      </div>
      <div class="body">
        <h3>&nbsp;&nbsp;&nbsp;👗 상점  |  </h3>
-       <code class="code">미니미의 옷과 가구를 구입할 수 있어요.<code>
-     </div>
+       <code class="code">미니미의 옷과 가구를 구입할 수 있어요.<code><br>
+      <div id="contents">
+        <div id="shoes">
+          <h3 id="h3">👟</h3>
+          <?php
+            while ($row = oci_fetch_array($sti1)){
+              echo "<table>";
+              echo "<tr><td width='100' height='80'> $row[0] </td>";
+              echo "<td width='100'><img src=$row[1] id='img'></td>";
+              echo "</tr></table>";
+            }
+         ?>
+        </div>
+        <div id="dress">
+          <h3 id="h3">👗</h3>
+          <?php
+            while ($row = oci_fetch_array($sti2)){
+              echo "<table>";
+              echo "<tr><td width='100px'> $row[0] </td>";
+              echo "<td width='100px'><img src=$row[1] id='img1'></td>";
+              echo "</tr></table>";
+            }
+         ?>
+        </div>
+        <div id="tshirt">
+          <h3 id="h3">👕</h3>
+          <?php
+          while ($row = oci_fetch_array($sti3)){
+            echo "<table>";
+            echo "<tr><td width='100px'> $row[0] </td>";
+            echo "<td width='100px'><img src=$row[1] id='img1'></td>";
+            echo "</tr></table>";
+          }
+         ?>
+        </div>
+      </div>
+      <input type="button" value="👜구매하기" id="btn" onclick="popup()" >
+    </div>
    </div>
 </body>
 </html>

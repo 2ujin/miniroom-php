@@ -11,10 +11,9 @@
   // echo $id;
   $result = "select b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where AUTHOR = '$user' and f.id = b.id  or (f.mem_id = '$user' and f.target_mem_id = '$id') ORDER BY b.no";
   $sti2 = oci_parse($conn, $result);
-
   oci_execute($sti2);
 
-  // $query = "select * from (select id from user_tbl order by dbms_random.value) where rownum <= 1";
+  // $query = "select * from table5";
   $query = "select * from homepage_tbl where id='$user'";
   $id =  $_COOKIE["id"];
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
@@ -22,6 +21,8 @@
   oci_execute($sti);
 
   while ($row = oci_fetch_array($sti)){
+    // setcookie("src", $row[0]);
+    // echo "<script><img src='img/mini.png'></script>";
         setcookie("color", $row[2]);
         setcookie("character", $row[1]);
         setcookie("homename", $row[3]);
@@ -43,7 +44,7 @@
     font-family: "AppleSDGothicNeoM00";
     /* margin-top: 30px; */
     margin: auto;
-    /* margin-left: 50px; */
+    margin-left: 50px;
     border-collapse: collapse;
     /* padding: 10px; */
     text-align: center;
@@ -110,6 +111,7 @@
  var color = '<?= $_COOKIE["color"] ?>';
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
+
 var id = '<?= $user ?>';
 function send(){
   location.href = "./write_board.php?user="+id;
@@ -190,7 +192,6 @@ $(document).ready(function(){
         </table>
        <?php
          while ($row = oci_fetch_array($sti2)){
-                      // setcookie("color2", $row[0]);
            echo "<table id='table'>";
            echo "<tr><td width='40px'> $row[0] </td>";
            echo "<td width='40px'>$row[1]</td>";
@@ -198,7 +199,6 @@ $(document).ready(function(){
            $id = $user;
            echo "<td width='280px'><a href='./board_detail.php?number=$number&user=$id' style='color:blue;'>$row[2]</a></td>";
            echo "<td width='150px'>$row[3]</td>";
-           // echo "<td width='100px'>$row[4]</td>";
            echo "</tr></table>";
          }
       ?>
