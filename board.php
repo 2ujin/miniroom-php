@@ -5,6 +5,14 @@
   $password = '1234';
   $database = "localhost/xe";
   $user = $_GET['user'];
+
+  $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+
+  $result = "select  NO, ID, TITLE, C_DATE from BOARD_TBL where AUTHOR = '$user'";
+  $sti2 = oci_parse($conn, $result);
+
+  oci_execute($sti2);
+
   $query = "select * from homepage_tbl where id='$user'";
   $id =  $_COOKIE["id"];
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
@@ -31,17 +39,21 @@
   }
   table{
     font-family: "AppleSDGothicNeoM00";
-    margin-left: 50px;
+    /* margin-top: 30px; */
+    margin: auto;
+    /* margin-left: 50px; */
     border-collapse: collapse;
-    padding: 10px;
-  }
-  .td{
+    /* padding: 10px; */
+    text-align: center;
+    }
+  th{
     background-color: #e3f2fd;
     padding: 5px;
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
     color: #102bb7;
-    font-size: 15px;
+    text-align: center;
+    font-size: 13px;
   }
   td{
     padding: 7px;
@@ -59,6 +71,33 @@
     font-size: 40px;
     line-height: 60px;
   }
+  #btn{
+    margin-top: 10px;
+    margin-left: 480px;
+    margin-bottom: 10px;
+    background-color: #e3f2fd;
+    border: none;
+    width: 80px;
+    height: 25px;
+    border-radius: 80px;
+    font-family: "AppleSDGothicNeoM00";
+  }
+  #board_tbl{
+    width:560px;
+    height: 360px;
+    /* border-radius: 20px; */
+    text-align: center;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .code{
+    font-size: 15px;
+    font-family: "AppleSDGothicNeoM00";
+    position:absolute;
+    top: 35px;
+    left: 150px;
+  }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
@@ -67,6 +106,10 @@
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
    var id = '<?= $user ?>';
+
+function send(){
+  location.href='./write_board.php?user='+id;
+}
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
   $("#describe").text(describe);
@@ -128,39 +171,35 @@ $(document).ready(function(){
        <a href="#"><div class="random_page">🌌</div></a>
      </div>
      <div class="body">
-       <h3>&nbsp;&nbsp;&nbsp;📄 게시판</h3>
-       <table width="500px">
-         <tr>
-           <td class="td">번호</td>
-           <td width="150px" class="td">제목</td>
-           <td width="100px" class="td">글쓴이</td>
-           <td width="100px" class="td">날짜</td>
-           <td class="td">조회수</td>
-         </tr>
-         <tr>
-           <td>1</td>
-           <td width="150px">안녕</td>
-           <td width="100px">유진</td>
-           <td width="100px">8/18</td>
-           <td>5</td>
-         </tr>
-         <tr>
-           <td>2</td>
-           <td width="150px">오늘은 무슨날??</td>
-           <td width="100px">유진</td>
-           <td width="100px">8/18</td>
-           <td>1</td>
-         </tr>
-         <tr>
-           <td>3</td>
-           <td width="150px">내일 개학이다 ㅠㅠ</td>
-           <td width="100px">유진</td>
-           <td width="100px">8/18</td>
-           <td>2</td>
-         </tr>
-       </table>
-       <input type="button" value="✍글쓰기" class="btn1">
+       <h3>&nbsp;&nbsp;&nbsp;📄 게시판 | </h3>
+       <code class="code">친구들과 글을 써서 소통할 수 있어요.</code>
+       <div id="board_tbl">
+       <table>
+          <tr>
+            <th width="40px">번호</th>
+            <th width="50px">아이디</th>
+            <!-- <th width="220px">글쓴이</th> -->
+            <th width="280px">제목</th>
+            <th width="150px">날짜</th>
+          </tr>
+        </table>
+       <?php
+         while ($row = oci_fetch_array($sti2)){
+           echo "<table id='table'>";
+           echo "<tr><td width='40px'> $row[0] </td>";
+           echo "<td width='40px'>$row[1]</td>";
+           echo "<td width='280px'>$row[2]</td>";
+           echo "<td width='150px'>$row[3]</td>";
+           // echo "<td width='100px'>$row[4]</td>";
+           echo "</tr></table>";
+         }
+      ?>
+      </div>
+      <input type="button" value="✍글쓰기" id="btn" onclick="send()" >
+
      </div>
+
    </div>
+
 </body>
 </html>
