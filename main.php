@@ -4,15 +4,16 @@
   $username = 'minirooma';
   $password = '1234';
   $database = "localhost/xe";
-  $user = $_GET['user'];
-  $query = "select * from homepage_tbl where id='$user'";
-  $id =  $_COOKIE["id"];
+  $user = $_GET['user']; // 변환한 주소 값 id 얘는 그냥 색깔할떄만 필요한가.,,,?!
+  $id =  $_COOKIE["id"]; // 계속 로그인한 값
+
+  $query = "select * from homepage_tbl where id='$user'"; //$user로 해야 주소를 바꿀 때 마다 캐릭터랑 그런게 바뀌니꽌,,
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
   $sti = oci_parse($conn, $query);
   oci_execute($sti);
 
   while ($row = oci_fetch_array($sti)){
-        setcookie("color", $row[2]);
+        setcookie("color", $row[2]); //user의 색깔져장
         setcookie("character", $row[1]);
         setcookie("homename", $row[3]);
         setcookie("describe", $row[4]);
@@ -99,7 +100,20 @@
     top: 130px;
     text-align: center;
   }
-
+  #input{
+    /* background-color: gray; */
+    position: absolute;
+    left: 530px;
+    top: 6px
+    /* margin-left: 300px; */
+  }
+  #input2{
+    /* background-color: gray; */
+    position: absolute;
+    left: 460px;
+    top: 6px
+    /* margin-left: 300px; */
+  }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
@@ -107,8 +121,12 @@
     var color = '<?= $_COOKIE["color"] ?>';
     var homename = '<?= $_COOKIE["homename"] ?>';
     var describe = '<?= $_COOKIE["describe"] ?>';
-    var id = '<?= $user ?>';
+    var id = '<?= $user ?>'; //주소값 가져온거임 헷갈 노노 로그인한 id 아님
  // location.href = "./main.php?user="+id;
+    function add_friend(){
+      location.href = "./add_friend.php?user="+id;
+    }
+
    $(document).ready(function(){
      $("#homename").text("🏡" + homename);
      $("#describe").text(describe);
@@ -167,6 +185,15 @@
          </div>
          <p id="homename"></p>
          <p id="describe"></p>
+         <?php
+          if($id == $user){ ?>
+         <?php }
+          else{ ?> <!-- 로그인한 사람 페이지가 아닐때만 친구추가 버튼 보여쥼 ㅎㅎ-->
+            <a><input type="button" id="input" value="🙋‍" onclick="add_friend()"></a>
+          <?php }
+          ?>
+         <a href="logout.php"><input type="button" id="input2" value="👋"></a>
+
          <a href="#"><div class="random_page">🌌</div></a>
        </div>
     <div class="body">

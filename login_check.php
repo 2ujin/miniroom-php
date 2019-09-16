@@ -12,7 +12,7 @@
   $id = $_GET['id'];
   $pw = $_GET['pw'];
 
-  setcookie("id", $id);
+  setcookie("id", $id); //로그인 할 때 쿠키 구움
 
 
   $query = "select * from user_tbl where id='$id'";

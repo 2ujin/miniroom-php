@@ -6,17 +6,6 @@
  box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
  text-align: center;
  }
- .btn1{
-  position:absolute;
-  background-color: #e3f2fd;
-  border: none;
-  width: 80px;
-  height: 25px;
-  border-radius: 80px;
-  left: 480px;
-  top: 220px;
-  font-family: "AppleSDGothicNeoM00";
- }
  .list{
    width: 90px;
    height: 40px;
@@ -135,6 +124,20 @@
    text-align: center;
    font-size: 40px;
    line-height: 60px;
+ }
+ #friend_btn{
+   width:200px;
+   height: 60px;
+   border-radius: 50%;
+   position:absolute;
+   left: 930px;
+   top: 100px;
+   text-align: center;
+   font-size: 40px;
+   line-height: 60px;
+ }
+ a{
+   /* background-color: red; */
  }
  #homename{
    margin-top: 20px;

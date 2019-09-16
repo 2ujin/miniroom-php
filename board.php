@@ -7,12 +7,14 @@
   $user = $_GET['user'];
 
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
-
-  $result = "select  NO, ID, TITLE, C_DATE from BOARD_TBL where AUTHOR = '$user'";
+  $id =  $_COOKIE["id"];
+  // echo $id;
+  $result = "select b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where AUTHOR = '$user' and f.id = b.id  or (f.mem_id = '$user' and f.target_mem_id = '$id')";
   $sti2 = oci_parse($conn, $result);
 
   oci_execute($sti2);
 
+  // $query = "select target_mem_id from friend_tbl where mem_id='royouin'";
   $query = "select * from homepage_tbl where id='$user'";
   $id =  $_COOKIE["id"];
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
@@ -20,6 +22,9 @@
   oci_execute($sti);
 
   while ($row = oci_fetch_array($sti)){
+    // echo $row[0];
+        // setcookie("color", $row[0]);
+        // echo $_COOKIE["color"];
         setcookie("color", $row[2]);
         setcookie("character", $row[1]);
         setcookie("homename", $row[3]);
@@ -108,11 +113,10 @@
  var color = '<?= $_COOKIE["color"] ?>';
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
- var id = '<?= $user ?>';
-
- function send(){
-   location.href='./write_board.php?user='+id;
- }
+var id = '<?= $user ?>';
+function send(){
+  location.href = "./write_board.php?user="+id;
+}
 
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);

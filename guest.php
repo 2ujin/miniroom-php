@@ -249,7 +249,7 @@ $(document).ready(function(){
      <div class="body">
        <h3>&nbsp;&nbsp;&nbsp;💌 방명록  |  </h3>
        <code class="code">나를 찾아주는 방문자와 안부를 묻고 대화를 할 수 있어요.<code>
-      <form class="write" action="guest_insert.php" >
+      <form method="get" class="write" action="guest_insert.php" >
         <textarea cols="50px" rows="5px" placeholder="내용을 입력해주세요!" name="value"></textarea>
         <input type="submit" value="✍글쓰기" class="btn1" onclick="send()">
       </form>
