@@ -98,6 +98,9 @@
     top: 35px;
     left: 150px;
   }
+  .move{
+    color: blue;
+  }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
@@ -105,11 +108,12 @@
  var color = '<?= $_COOKIE["color"] ?>';
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
-   var id = '<?= $user ?>';
+ var id = '<?= $user ?>';
 
-function send(){
-  location.href='./write_board.php?user='+id;
-}
+ function send(){
+   location.href='./write_board.php?user='+id;
+ }
+
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
   $("#describe").text(describe);
@@ -185,10 +189,13 @@ $(document).ready(function(){
         </table>
        <?php
          while ($row = oci_fetch_array($sti2)){
+                      // setcookie("color2", $row[0]);
            echo "<table id='table'>";
            echo "<tr><td width='40px'> $row[0] </td>";
            echo "<td width='40px'>$row[1]</td>";
-           echo "<td width='280px'>$row[2]</td>";
+           $number = $row[0];
+           $id = $user;
+           echo "<td width='280px'><a href='./board_detail.php?number=$number&user=$id' style='color:blue;'>$row[2]</a></td>";
            echo "<td width='150px'>$row[3]</td>";
            // echo "<td width='100px'>$row[4]</td>";
            echo "</tr></table>";
