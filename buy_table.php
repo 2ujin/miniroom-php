@@ -22,6 +22,12 @@
   div{
     margin-top: 20px;
   }
+  #btn{
+    /* background-color: #e3f2fd; */
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+  }
   </style>
   <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script type="text/javascript">
@@ -40,7 +46,7 @@
         <input type="radio" name="product" value="하늘색티">💙 하늘색티 👕<br>
         <input type="radio" name="product" value="노란색티">💛 노란색티 👕<br>
         <input type="radio" name="product" value="초록색티">💚 초록색티 👕<br><br>
-        <input type="submit" value="구입">
+        <input type="submit" id="btn" value="구입">
       </form>
     </div>
  </body>
