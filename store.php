@@ -191,9 +191,6 @@
     position:absolute;
     top: 410px;
     left: 130px;
-    /* margin-top: 380px; */
-    /* margin-left: 140px; */
-    /* margin-bottom: 10px; */
     background-color: #e3f2fd;
     border: none;
     width: 100px;

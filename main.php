@@ -144,7 +144,9 @@
     function add_friend(){
       location.href = "./add_friend.php?user="+id;
     }
-
+    function hi(){
+      alert("gdd");
+    }
    $(document).ready(function(){
      $("#homename").text("🏡" + homename);
      $("#describe").text(describe);
@@ -163,7 +165,6 @@
        ?>
        var randomId = '<?= $_COOKIE["randomId"] ?>';
          // alert(randomId);
-
          location.href = "./main.php?user="+randomId;
      });
 
@@ -182,29 +183,55 @@
        $("#character").css("width", "70%");
      }
      if(color == '파란색'){
+       $(".list").on("click", function(){
+           $(".list").css("background-color", "#4F93C1");
+           location.href = "./main.php?user="+id;
+       });
+       $(".list1").on("click", function(){
+           $(".list1").css("background-color", "#4F93C1");
+           location.href = "./board.php?user="+id;
+       });
+       $(".list2").on("click", function(){
+           $(".list2").css("background-color", "#4F93C1");
+            location.href = "./guest.php?user="+id;
+       });
+       $(".list3").on("click", function(){
+           $(".list3").css("background-color", "#4F93C1");
+            location.href = "./store.php?user="+id;
+       });
+       $(".list4").on("click", function(){
+           $(".list4").css("background-color", "#4F93C1");
+            location.href = "./management.php?user="+id;
+       });
      }
      else{
        $(".out").css("background-color", "#EA8E33");
+       $(".list").css("background-color", "#EA8E33");
+       $(".list").on("click", function(){
+           $(".list").css("background-color", "#EA8E33");
+           location.href = "./main.php?user="+id;
+       });
+       $(".list1").on("click", function(){
+           $(".list1").css("background-color", "#EA8E33");
+           location.href = "./board.php?user="+id;
+       });
+       $(".list2").on("click", function(){
+           $(".list2").css("background-color", "#EA8E33");
+            location.href = "./guest.php?user="+id;
+       });
+       $(".list3").on("click", function(){
+           $(".list3").css("background-color", "#EA8E33");
+            location.href = "./store.php?user="+id;
+       });
+       $(".list4").on("click", function(){
+           $(".list4").css("background-color", "#EA8E33");
+            location.href = "./management.php?user="+id;
+       });
      }
-     $(".list").on("click", function(){
-         $(".list").css("background-color", "#4F93C1");
-         location.href = "./main.php?user="+id;
-     });
-     $(".list1").on("click", function(){
-         $(".list1").css("background-color", "#4F93C1");
-         location.href = "./board.php?user="+id;
-     });
-     $(".list2").on("click", function(){
-         $(".list2").css("background-color", "#4F93C1");
-          location.href = "./guest.php?user="+id;
-     });
-     $(".list3").on("click", function(){
-         $(".list3").css("background-color", "#4F93C1");
-          location.href = "./store.php?user="+id;
-     });
-     $(".list4").on("click", function(){
-         $(".list4").css("background-color", "#4F93C1");
-          location.href = "./management.php?user="+id;
+     $("#body_character").on("click", function(){
+       var popupX = (document.body.offsetWidth / 2) - (200 / 2) - 80;
+       var popupY= (document.body.offsetHeight / 2) - (300 / 2) - 60;
+       window.open("see_buy_table.php", "pop", 'width=400,height=300,history=no,resizable=no,status=no,scrollbars=no,menubar=no, left='+popupX+', top=' + popupY);
      });
    });
 </script>
@@ -219,7 +246,7 @@
          <div class="character1">
            <img id="character" class="ch1">
          </div>
-         <p id="homename"></p>
+         <a href="./main.php?user=<?= $id ?>"><p id="homename"></p></a>
          <p id="describe"></p>
          <?php
           if($id == $user){ ?>
@@ -229,10 +256,11 @@
           <?php }
           ?>
          <a href="logout.php"><input type="button" id="input2" value="👋"></a>
-         <a ><input type="button" class="random_page" value="🌌"></a>
+         <a><input type="button" class="random_page" value="🌌"></a>
        </div>
     <div class="body">
-      <img  class="main_ch" id="body_character">
+      <div id="said">💬</div>
+      <img class="main_ch" id="body_character">
     </div>
    </div>
 </body>

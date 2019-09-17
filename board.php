@@ -9,11 +9,10 @@
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
   $id =  $_COOKIE["id"];
   // echo $id;
-  $result = "select b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where AUTHOR = '$user' and f.id = b.id  or (f.mem_id = '$user' and f.target_mem_id = '$id') ORDER BY b.no";
+  $result = "select DISTINCT b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where ('$id' = '$user' and AUTHOR = '$user') or (f.id = b.id and f.mem_id = '$user' and f.target_mem_id = '$id') ORDER BY b.no";
   $sti2 = oci_parse($conn, $result);
   oci_execute($sti2);
 
-  // $query = "select * from table5";
   $query = "select * from homepage_tbl where id='$user'";
   $id =  $_COOKIE["id"];
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
@@ -21,8 +20,6 @@
   oci_execute($sti);
 
   while ($row = oci_fetch_array($sti)){
-    // setcookie("src", $row[0]);
-    // echo "<script><img src='img/mini.png'></script>";
         setcookie("color", $row[2]);
         setcookie("character", $row[1]);
         setcookie("homename", $row[3]);
@@ -44,7 +41,7 @@
     font-family: "AppleSDGothicNeoM00";
     /* margin-top: 30px; */
     margin: auto;
-    margin-left: 50px;
+    /* margin-left: 50px; */
     border-collapse: collapse;
     /* padding: 10px; */
     text-align: center;
@@ -196,18 +193,22 @@ $(document).ready(function(){
            echo "<tr><td width='40px'> $row[0] </td>";
            echo "<td width='40px'>$row[1]</td>";
            $number = $row[0];
-           $id = $user;
-           echo "<td width='280px'><a href='./board_detail.php?number=$number&user=$id' style='color:blue;'>$row[2]</a></td>";
+           $id1 = $user;
+           echo "<td width='280px'><a href='./board_detail.php?number=$number&user=$id1' style='color:blue;'>$row[2]</a></td>";
            echo "<td width='150px'>$row[3]</td>";
            echo "</tr></table>";
          }
       ?>
       </div>
-      <input type="button" value="✍글쓰기" id="btn" onclick="send()" >
-
-     </div>
-
+      <?php
+       if($id == $user){ ?>
+         <input type="button" value="✍글쓰기" id="btn" onclick="send()" >
+      <?php }
+       else{ ?> <!-- 로그인한 사람 페이지가 아닐때만 친구추가 버튼 보여쥼 ㅎㅎ-->
+         <!-- <input type="button" id="input" value="🙋‍" onclick="add_friend()"> -->
+       <?php }
+       ?>
+    </div>
    </div>
-
 </body>
 </html>

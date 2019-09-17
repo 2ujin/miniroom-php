@@ -1,3 +1,6 @@
+*:focus {
+  outline:none;
+}
 .out {
  width: 630px;
  height: 630px;
@@ -91,6 +94,12 @@
  a{
    text-decoration: none;
    color: black;
+ }
+ #said{
+   position:absolute;
+   left: 280px;
+   top: 130px;
+   font-size: 40px;
  }
  .character1{
    width: 80px;

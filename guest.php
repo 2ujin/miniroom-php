@@ -9,7 +9,7 @@
 
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
 
-  $result = "select AUTHOR, CONTENTS, C_DATE from guest_tbl where touser='$user' ORDER BY c_date ASC";
+  $result = "select DISTINCT AUTHOR, CONTENTS, C_DATE from guest_tbl where touser='$user' ORDER BY c_date ASC";
   $sti2 = oci_parse($conn, $result);
 
   oci_execute($sti2);
@@ -264,15 +264,6 @@ $(document).ready(function(){
         ?>
       </div>
     </div>
-      <!-- <div class="guest_write">
-      📢 은서 : 안녕하세용!~ 놀러왔서욤 ㅎㅎ
-      </div>
-      <div class="guest_write1">
-        📢 은서 : 반가워요 ㅎㅎㅎㅎㅎ :-)
-      </div>
-      <div class="guest_write2">
-        📢 소민 : 내일 놀 사람 ~~~ 전 너무 심심해요 ㅜㅠ
-      </div> -->
      </div>
      <div>
    </div>

@@ -8,6 +8,8 @@
   $conn = oci_connect($username, $password, $database,  'AL32UTF8');
   $id =  $_COOKIE["id"];
 
+  setcookie("color", '오렌지');
+
   $sql = "UPDATE homepage_tbl SET color = '오렌지' where id = '$id'";
   $sti = oci_parse($conn, $sql);
   oci_execute($sti);

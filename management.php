@@ -6,6 +6,14 @@ $username = 'minirooma';
 $password = '1234';
 $database = "localhost/xe";
 $user = $_GET['user'];
+
+$result = "select * from user_tbl where id='$user'";
+$id =  $_COOKIE["id"];
+$conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+$sti2 = oci_parse($conn, $result);
+oci_execute($sti2);
+
+
 $query = "select * from homepage_tbl where id='$user'";
 $id =  $_COOKIE["id"];
 $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
@@ -18,18 +26,12 @@ while ($row = oci_fetch_array($sti)){
       setcookie("homename", $row[3]);
       setcookie("describe", $row[4]);
 }
-
-if($_SESSION['id']==null) { // 로그인 하지 않았다면
-}else{ // 로그인 했다면
-  // echo $_SESSION['id'];
-  if($_SESSION['id']==$user){
-    // echo "로그인 한 사람과 접속한 미니홈피가 같움";
-  }
-  else {
-    // echo "다름";
-  }
-   // echo "(".$_SESSION['nickname'].")님이 로그인 하였습니다.";
-   // echo "&nbsp;<a href='logout.php'><input type='button' value='Logout'></a>";
+while ($row = oci_fetch_array($sti2)){
+  // echo $row[0];
+  setcookie("user_name", $row[0]);
+  setcookie("user_nickname", $row[1]);
+  setcookie("user_id", $row[2]);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -111,6 +113,22 @@ if($_SESSION['id']==null) { // 로그인 하지 않았다면
     top: 35px;
     left: 126px;
   }
+  #home{
+    /* width: 500px; */
+    font-family: "AppleSDGothicNeoM00";
+  }
+  #table{
+    margin: auto;
+    width: 500px;
+  }
+  #table2{
+    /* margin-top: -600px; */
+    margin: auto;
+    width: 500px;
+  }
+  #cc{
+    text-align: center;
+  }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script type="text/javascript">
@@ -181,14 +199,44 @@ $(document).ready(function(){
        <a href="#"><div class="random_page">🌌</div></a>
      </div>
      <div class="body">
-       <h3>&nbsp;&nbsp;&nbsp;🔧 관리  |  </h3>
-       <code class="code">개인정보 수정 및 회원관리를 할 수 있어요<code>
+       <h3>&nbsp;&nbsp;&nbsp;🔧 관리 </h3><br><br>
+       <caption>회원정보</caption>
+         <table id="table2">
+           <tr>
+             <td>이름</td>
+             <td id="cc"><input type="text" name="user_name" value=<?= $_COOKIE["user_name"]?>></td>
+             <td id="cc"><a href="#" style='color:blue;'><input type="button" value="수정"></a></td>
+           </tr>
+           <tr>
+             <td>닉네임</td>
+             <td id="cc"><input type="text" value=<?= $_COOKIE["user_nickname"]?>></td>
+             <td id="cc"><input type="button" value="수정"></td>
+           </tr>
+           <tr>
+             <td>아이디</td>
+             <td id="cc"><input type="text" value=<?= $_COOKIE["user_id"]?>></td>
+             <td id="cc"><input type="button" value="수정"></td>
+           </tr>
+         </table><br>
+       <caption>홈피내용</caption>
+         <table id="table">
+           <tr>
+             <td>홈피이름</td>
+             <td id="cc"><input type="text" value=<?= $_COOKIE["homename"]?></td>
+             <td id="cc"><input type="button" value="수정"></td>
+           </tr>
+           <tr>
+             <td>한줄소개</td>
+             <td id="cc"><input type="text" value=<?= $_COOKIE["describe"]?></td>
+             <td id="cc"><input type="button" value="수정"></td>
+           </tr>
+           <tr>
+             <td>색상</td>
+             <td id="cc"><input type="text" value=<?= $_COOKIE["color"]?></td>
+             <td id="cc"><input type="button" value="수정"></td>
+           </tr>
+         </table>
      </div>
    </div>
 </body>
 </html>
-<?php
-
-}
-
-?>
