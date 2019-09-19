@@ -1,9 +1,9 @@
 # miniroom
-oracle DB project
+나만의 미니홈피를 만들어서 친구들과 소통 할 수 있는 웹사이트 
 2019/08 ~
 
 ## PREVIEW 🌠
-나만의 미니홈피를 만들어서 친구들과 소통 할 수 있는 웹사이트 
+간단한 실행화면 이미지 
 - 회원가입
 ![image](https://user-images.githubusercontent.com/42020919/65212326-ac4e8c80-dadc-11e9-86f1-4e7a375dc162.png)
 - 캐릭터 선택
