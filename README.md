@@ -10,8 +10,9 @@ oracle DB project
 ![image](https://user-images.githubusercontent.com/42020919/65212358-c0928980-dadc-11e9-9fb1-d1c58a9615ce.png)
 - 메인 화면
 ![image](https://user-images.githubusercontent.com/42020919/65212383-d86a0d80-dadc-11e9-9cc5-6149a159cf6b.png)
-- 글작성
+- 글 작성
 ![image](https://user-images.githubusercontent.com/42020919/65212418-f6d00900-dadc-11e9-8d7b-b60a489e0724.png)
+> 게시판 글은 본인만 작성할 수 있고 작성한 글은 친구에게만 보여준다.
 - 게시판 글
 ![image](https://user-images.githubusercontent.com/42020919/65212431-08191580-dadd-11e9-8f25-b8f8a75ea47f.png)
 - 글 상세보기
