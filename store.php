@@ -5,6 +5,8 @@
   $password = '1234';
   $database = "localhost/xe";
   $user = $_GET['user'];
+  $id =  $_COOKIE["id"];
+
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
 
   $result1 = "select name, src from store_tbl where kind='신발'";

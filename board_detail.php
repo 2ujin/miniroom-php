@@ -91,13 +91,25 @@
     background-color: #d1d2d7;
     border: none;
     font-family: "AppleSDGothicNeoM00";
+
     padding-top: 10px;
     padding-left: 10px;
   }
   .btn{
     margin-top: 10px;
-    margin-left: 420px;
+    margin-left: 390px;
     margin-bottom: 10px;
+    background-color: #e3f2fd;
+    border: none;
+    width: 80px;
+    height: 25px;
+    border-radius: 80px;
+    font-family: "AppleSDGothicNeoM00";
+    float: left;
+  }
+  .btn1{
+    margin-right: 20px;
+    margin-top: 10px;
     background-color: #e3f2fd;
     border: none;
     width: 80px;
@@ -120,7 +132,10 @@
  function send(){
      location.href='./board.php?user='+id;
  }
-
+ function send_delete() {
+   var number = '<?= $number = $_GET['number']; ?>';
+     location.href='./board_delete.php?user='+id+"&number="+number;
+ }
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
   $("#describe").text(describe);
@@ -181,7 +196,8 @@ $(document).ready(function(){
          <div type="text" id="title" >작성자 : <?= $_COOKIE["id"] ?></div>
          <div type="text" id="author" ><?= $_COOKIE["title"] ?> / <?= $_COOKIE["c_date"] ?></div>
          <div id="value"><?= $_COOKIE["contents"] ?></div>
-         <input type="submit" class="btn" value="확인" onclick="send()">
+         <input type="submit" class="btn1" value="확인" onclick="send()">
+         <input type="submit" class="btn" value="삭제" onclick="send_delete()">
        <!-- </form> -->
      </div>
    </div>

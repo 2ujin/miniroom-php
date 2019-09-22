@@ -39,11 +39,8 @@
   }
   table{
     font-family: "AppleSDGothicNeoM00";
-    /* margin-top: 30px; */
     margin: auto;
-    /* margin-left: 50px; */
     border-collapse: collapse;
-    /* padding: 10px; */
     text-align: center;
     }
   th{

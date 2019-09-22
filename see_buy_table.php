@@ -7,8 +7,9 @@
 
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
   $id =  $_COOKIE["id"];
+  $user = $_GET['user'];
   // echo $id;
-  $result = "select  s.name, s.src from store_tbl s, buy_tbl b where b.name = s.name and b.id = '$id'";
+  $result = "select  s.name, s.src from store_tbl s, buy_tbl b where b.name = s.name and b.id = '$user'";
   $sti2 = oci_parse($conn, $result);
   oci_execute($sti2);
 

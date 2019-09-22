@@ -144,9 +144,6 @@
     function add_friend(){
       location.href = "./add_friend.php?user="+id;
     }
-    function hi(){
-      alert("gdd");
-    }
    $(document).ready(function(){
      $("#homename").text("🏡" + homename);
      $("#describe").text(describe);
@@ -231,7 +228,7 @@
      $("#body_character").on("click", function(){
        var popupX = (document.body.offsetWidth / 2) - (200 / 2) - 80;
        var popupY= (document.body.offsetHeight / 2) - (300 / 2) - 60;
-       window.open("see_buy_table.php", "pop", 'width=400,height=300,history=no,resizable=no,status=no,scrollbars=no,menubar=no, left='+popupX+', top=' + popupY);
+       window.open("see_buy_table.php?user="+id, "pop", 'width=400,height=300,history=no,resizable=no,status=no,scrollbars=no,menubar=no, left='+popupX+', top=' + popupY);
      });
    });
 </script>

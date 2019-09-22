@@ -6,12 +6,19 @@ $username = 'minirooma';
 $password = '1234';
 $database = "localhost/xe";
 $user = $_GET['user'];
-
-$result = "select * from user_tbl where id='$user'";
 $id =  $_COOKIE["id"];
+setcookie("user", $user);
+$result = "select * from user_tbl where id='$id'";
+
 $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
 $sti2 = oci_parse($conn, $result);
 oci_execute($sti2);
+
+$result = "select * from homepage_tbl where id='$id'";
+
+$conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
+$sti3 = oci_parse($conn, $result);
+oci_execute($sti3);
 
 
 $query = "select * from homepage_tbl where id='$user'";
@@ -30,7 +37,12 @@ while ($row = oci_fetch_array($sti2)){
   // echo $row[0];
   setcookie("user_name", $row[0]);
   setcookie("user_nickname", $row[1]);
-  setcookie("user_id", $row[2]);
+  setcookie("user_pw", $row[3]);
+}
+
+while ($row = oci_fetch_array($sti3)){
+  setcookie("homename1", $row[3]);
+  setcookie("describe1", $row[4]);
 }
 ?>
 <!DOCTYPE html>
@@ -114,20 +126,38 @@ while ($row = oci_fetch_array($sti2)){
     left: 126px;
   }
   #home{
-    /* width: 500px; */
     font-family: "AppleSDGothicNeoM00";
   }
-  #table{
+  #table2 ,#table{
+    font-family: "AppleSDGothicNeoM00";
+    text-align: center;
     margin: auto;
     width: 500px;
+    border: 1px dotted black;
+    border-collapse: collapse;
+    margin-top: 20px;
   }
-  #table2{
-    /* margin-top: -600px; */
-    margin: auto;
-    width: 500px;
+  td{
+    padding: 7px;
+    font-size: 12px;
+    border-bottom: 1px dotted gray;
   }
   #cc{
     text-align: center;
+  }
+  #name, #nickname, #pw, #home, #describ{
+    width: 350px;
+    text-align: center;
+    font-family: "AppleSDGothicNeoM00";
+    border: none;
+    color: #ff7f00;
+  }
+  #btn{
+    border: none;
+    font-family: "AppleSDGothicNeoM00";
+    background-color: #ffa487;
+    border-radius: 10px;
+    color: white;
   }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -137,6 +167,31 @@ while ($row = oci_fetch_array($sti2)){
  var homename = '<?= $_COOKIE["homename"] ?>';
  var describe = '<?= $_COOKIE["describe"] ?>';
  var id = '<?= $user ?>';
+
+ function update1(){
+    var name = document.getElementById("name").value;
+    location.href='update_management.php?update='+name+"&name="+"name";
+ }
+ function update2(){
+   var nickname = document.getElementById("nickname").value;
+   location.href='update_management.php?update='+nickname+"&name="+"nickname";
+ }
+ function update3(){
+   var pw = document.getElementById("pw").value;
+   location.href='update_management.php?update='+pw+"&name="+"pw";
+ }
+ function update4(){
+   var home = document.getElementById("home").value;
+   location.href='update_management.php?update='+home+"&name="+"homename";
+ }
+ function update5(){
+   var describ = document.getElementById("describ").value;
+   location.href='update_management.php?update='+describ+"&name="+"describ";
+ }
+ function update6(){
+   var color = $('input[name="color"]:checked').val();
+   location.href='update_management.php?update='+color+"&name="+"color";
+ }
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
   $("#describe").text(describe);
@@ -199,41 +254,41 @@ $(document).ready(function(){
        <a href="#"><div class="random_page">🌌</div></a>
      </div>
      <div class="body">
-       <h3>&nbsp;&nbsp;&nbsp;🔧 관리 </h3><br><br>
-       <caption>회원정보</caption>
-         <table id="table2">
+       <h3>&nbsp;&nbsp;&nbsp;🔧 관리 </h3>
+       <caption id="caption">회원정보</caption>
+         <table id="table2" border="1px">
            <tr>
              <td>이름</td>
-             <td id="cc"><input type="text" name="user_name" value=<?= $_COOKIE["user_name"]?>></td>
-             <td id="cc"><a href="#" style='color:blue;'><input type="button" value="수정"></a></td>
+             <td id="cc"><input type="text" name="user_name" value="<?= $_COOKIE["user_name"]?>" id="name"></td>
+             <td id="cc"><input type="button" value="수정" onclick="update1()" id="btn"></td>
            </tr>
            <tr>
              <td>닉네임</td>
-             <td id="cc"><input type="text" value=<?= $_COOKIE["user_nickname"]?>></td>
-             <td id="cc"><input type="button" value="수정"></td>
+             <td id="cc"><input type="text" value="<?= $_COOKIE["user_nickname"]?>" id="nickname"></td>
+             <td id="cc"><input type="button" value="수정" onclick="update2()" id="btn"></td>
            </tr>
            <tr>
-             <td>아이디</td>
-             <td id="cc"><input type="text" value=<?= $_COOKIE["user_id"]?>></td>
-             <td id="cc"><input type="button" value="수정"></td>
+             <td>비밀번호</td>
+             <td id="cc"><input type="text" value="<?= $_COOKIE["user_pw"]?>" id="pw"></td>
+             <td id="cc"><input type="button" value="수정" onclick="update3()" id="btn"></td>
            </tr>
-         </table><br>
+         </table><br><br>
        <caption>홈피내용</caption>
-         <table id="table">
+         <table id="table2" border="1px">
            <tr>
              <td>홈피이름</td>
-             <td id="cc"><input type="text" value=<?= $_COOKIE["homename"]?></td>
-             <td id="cc"><input type="button" value="수정"></td>
+             <td id="cc"><input type="text" value="<?= $_COOKIE["homename1"]?>" id="home"></td>
+             <td id="cc"><input type="button" value="수정" onclick="update4()" id="btn"></td>
            </tr>
            <tr>
              <td>한줄소개</td>
-             <td id="cc"><input type="text" value=<?= $_COOKIE["describe"]?></td>
-             <td id="cc"><input type="button" value="수정"></td>
+             <td id="cc"><input type="text" value="<?= $_COOKIE["describe1"]?>" id="describ"></td>
+             <td id="cc"><input type="button" value="수정" onclick="update5()" id="btn"></td>
            </tr>
            <tr>
              <td>색상</td>
-             <td id="cc"><input type="text" value=<?= $_COOKIE["color"]?></td>
-             <td id="cc"><input type="button" value="수정"></td>
+             <td id="cc">오렌지 <input type="radio" name="color" value="오렌지"> 파란색<input type="radio" name="color" value="파란색"></td>
+             <td id="cc"><input type="button" value="수정" onclick="update6()" id="btn"></td>
            </tr>
          </table>
      </div>
