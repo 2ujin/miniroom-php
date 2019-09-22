@@ -8,8 +8,9 @@
 
   $conn = oci_connect($username, $password, $database,  'AL32UTF8'); //한글안깨지게 ((필수임))
   $id =  $_COOKIE["id"];
-  // echo $id;
-  $result = "select DISTINCT b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where ('$id' = '$user' and AUTHOR = '$user') or (f.id = b.id and f.mem_id = '$user' and f.target_mem_id = '$id') ORDER BY b.no";
+
+  $result = "select DISTINCT b.no, b.id, b.title, b.c_date from friend_tbl f, board_tbl b where ('$id' = '$user' and AUTHOR = '$user') or
+  (f.id = b.id and f.mem_id = '$user' and f.target_mem_id = '$id' and b.id = b.author) ORDER BY b.no";
   $sti2 = oci_parse($conn, $result);
   oci_execute($sti2);
 

@@ -14,7 +14,7 @@
   oci_execute($sti2);
 
   while ($row = oci_fetch_array($sti2)){
-    setcookie("id", $row[0]);
+    setcookie("t_id", $row[0]);
     setcookie("title", $row[1]);
     setcookie("contents", $row[2]);
     setcookie("c_date", $row[3]);
@@ -133,8 +133,12 @@
      location.href='./board.php?user='+id;
  }
  function send_delete() {
-   var number = '<?= $number = $_GET['number']; ?>';
+     var number = '<?= $number = $_GET['number']; ?>';
      location.href='./board_delete.php?user='+id+"&number="+number;
+ }
+ function scrap(){
+   var number = '<?= $number = $_GET['number']; ?>';
+     location.href='./scrap.php?user='+id+"&number="+number;
  }
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
@@ -193,12 +197,18 @@ $(document).ready(function(){
      </div>
      <div class="body"> <!--하얀배경-->
        <h3>&nbsp;&nbsp;&nbsp;✍ 글 상세보기  </h3>
-         <div type="text" id="title" >작성자 : <?= $_COOKIE["id"] ?></div>
+         <div type="text" id="title" >작성자 : <?= $_COOKIE["t_id"] ?></div>
          <div type="text" id="author" ><?= $_COOKIE["title"] ?> / <?= $_COOKIE["c_date"] ?></div>
          <div id="value"><?= $_COOKIE["contents"] ?></div>
-         <input type="submit" class="btn1" value="확인" onclick="send()">
-         <input type="submit" class="btn" value="삭제" onclick="send_delete()">
-       <!-- </form> -->
+         <input type="button" class="btn1" value="확인" onclick="send()">
+         <?php
+          if($id == $user){ ?>
+         <input type="button" class="btn" value="삭제" onclick="send_delete()">
+       <?php }
+       else{ ?> <!-- 로그인한 사람 페이지가 아닐때만 친구추가 버튼 보여쥼 ㅎㅎ-->
+         <input type="button" class="btn" value="스크랩‍" onclick="scrap()">
+       <?php }
+       ?>
      </div>
    </div>
 </body>

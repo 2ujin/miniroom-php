@@ -135,7 +135,7 @@ while ($row = oci_fetch_array($sti3)){
     width: 500px;
     border: 1px dotted black;
     border-collapse: collapse;
-    margin-top: 20px;
+    /* margin-top: 20px; */
   }
   td{
     padding: 7px;
@@ -158,6 +158,9 @@ while ($row = oci_fetch_array($sti3)){
     background-color: #ffa487;
     border-radius: 10px;
     color: white;
+  }
+  caption{
+    font-family: "AppleSDGothicNeoM00";
   }
  </style>
  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -192,6 +195,12 @@ while ($row = oci_fetch_array($sti3)){
    var color = $('input[name="color"]:checked').val();
    location.href='update_management.php?update='+color+"&name="+"color";
  }
+
+ function delete_member(){
+   alert("정말로 회원 탈퇴하시겠습니까?")
+   location.href='delete_member.php?user=<?= $user ?>';
+ }
+
 $(document).ready(function(){
   $("#homename").text("🏡" + homename);
   $("#describe").text(describe);
@@ -254,9 +263,9 @@ $(document).ready(function(){
        <a href="#"><div class="random_page">🌌</div></a>
      </div>
      <div class="body">
-       <h3>&nbsp;&nbsp;&nbsp;🔧 관리 </h3>
-       <caption id="caption">회원정보</caption>
+       <h3>&nbsp;&nbsp;&nbsp;🔧 관리 </h3><br>
          <table id="table2" border="1px">
+           <caption id="caption">회원정보</caption>
            <tr>
              <td>이름</td>
              <td id="cc"><input type="text" name="user_name" value="<?= $_COOKIE["user_name"]?>" id="name"></td>
@@ -272,9 +281,9 @@ $(document).ready(function(){
              <td id="cc"><input type="text" value="<?= $_COOKIE["user_pw"]?>" id="pw"></td>
              <td id="cc"><input type="button" value="수정" onclick="update3()" id="btn"></td>
            </tr>
-         </table><br><br>
-       <caption>홈피내용</caption>
+         </table><br>
          <table id="table2" border="1px">
+           <caption>홈피내용</caption>
            <tr>
              <td>홈피이름</td>
              <td id="cc"><input type="text" value="<?= $_COOKIE["homename1"]?>" id="home"></td>
@@ -291,6 +300,9 @@ $(document).ready(function(){
              <td id="cc"><input type="button" value="수정" onclick="update6()" id="btn"></td>
            </tr>
          </table>
+         <br>
+         <input type="button" value="회원탈퇴" onclick="delete_member()" id="btn">
+         <input type="button" value="친구목록" onclick="location.href='show_friend.php'" id="btn">
      </div>
    </div>
 </body>

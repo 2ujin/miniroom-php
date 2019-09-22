@@ -156,13 +156,12 @@ $(document).ready(function(){
        </div>
        <p id="homename"></p>
        <p id="describe"></p>
-       <a href="#"><div class="random_page">🌌</div></a>
      </div>
      <div class="body"> <!--하얀배경-->
        <h3>&nbsp;&nbsp;&nbsp;✍ 글 작성  </h3>
        <form method="get" action="board_db.php">
-         <input type="text" name="title" placeholder="  글 제목"></input><br>
-         <textarea cols="50px" name="value" rows="5px" placeholder=" 내용을 입력해주세요!" name="value"></textarea>
+         <input type="text" name="title" placeholder="  글 제목" required></input><br>
+         <textarea cols="50px" name="value" rows="5px" placeholder=" 내용을 입력해주세요!" name="value" required></textarea>
          <input type="submit" class="btn" value="👍업로드">
        </form>
      </div>
